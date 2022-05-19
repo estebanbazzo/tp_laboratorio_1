@@ -12,6 +12,9 @@ void menuPrincipal(void);
 void submenuModificar(void);
 void submenuModificarNacimiento(void);
 void submenuModificarDomicilio(void);
+void submenuInformar(void);
+void submenuInformar2(void);
+void submenuInformar5(void);
 
 int main(void) {
 	setbuf(stdout, NULL);
@@ -46,7 +49,7 @@ int main(void) {
 	if(initCensistas(censistas, MAX_CENSISTAS) == 0 && initZonasCenso(zonasCenso, MAX_CENSISTAS) == 0) {
 		do {
 			menuPrincipal();
-			if(getInt(&opcion, "\nIngrese una opción del menú principal: ", "Error: la opción ingresada es inválida", 1, 9, -1) == 0) {
+			if(getInt(&opcion, "\nIngrese una opción del menú principal: ", "Error: la opción ingresada es inválida", 1, 10, -1) == 0) {
 				switch(opcion) {
 				case 1:
 					auxId = setId();
@@ -233,12 +236,63 @@ int main(void) {
 					break;
 
 				case 9:
+					if(hayCensistas(censistas, MAX_CENSISTAS) == 0 && hayZonasCenso(zonasCenso, MAX_CENSISTAS) == 0) {
+						do {
+							submenuInformar();
+							if(getInt(&opcion, "\nIngrese una opción del menú Informes: ", "Error: la opción ingresada es inválida", 1, 6, -1) == 0) {
+								switch(opcion) {
+								case 1:
+									informar1(censistas, zonasCenso, MAX_CENSISTAS);
+									break;
+								case 2:
+									do {
+										submenuInformar2();
+										if(getInt(&opcion, "\nIngrese una opción del menú Informes: ", "Error: la opción ingresada es inválida", 1, 5, -1) == 0) {
+											switch(opcion) {
+											case 1:
+												break;
+											case 2:
+												break;
+											case 3:
+												break;
+											case 4:
+												break;
+											}
+										}
+									} while(opcion != 5);
+									break;
+								case 3:
+									informar3(zonasCenso, MAX_CENSISTAS);
+									break;
+								case 4:
+									informar4(zonasCenso, censistas, MAX_CENSISTAS);
+									break;
+								case 5:
+									do {
+										submenuInformar5();
+										if(getInt(&opcion, "\nIngrese una opción del menú Informes: ", "Error: la opción ingresada es inválida", 1, 3, -1) == 0) {
+											switch(opcion) {
+											case 1:
+												break;
+											case 2:
+												break;
+											}
+										}
+									} while(opcion != 3);
+									break;
+								}
+							}
+						} while(opcion != 6);
+					}
+					break;
+
+				case 10:
 					printf("\nGracias por usar el programa");
 					retorno = 0;
 					break;
 				}
 			}
-		} while(opcion != 9);
+		} while(opcion != 10);
 	}
 
 	return retorno;
@@ -253,7 +307,8 @@ void menuPrincipal(void) {
 		   "\n6. Carga de datos"
 		   "\n7. Mostrar censistas"
 		   "\n8. Mostrar zonas"
-		   "\n9. Salir del programa\n");
+		   "\n9. Informes"
+		   "\n10. Salir del programa\n");
 }
 
 void submenuModificar(void) {
@@ -276,4 +331,27 @@ void submenuModificarDomicilio(void) {
 	printf("\n1. Modificar la calle del domicilio"
 		   "\n2. Modificar la altura del domicilio"
 		   "\n3. Volver al submenú modificación de censista\n");
+}
+
+void submenuInformar(void) {
+	printf("\n1. Cantidad de censistas activos con zona pendiente"
+		   "\n2. Listado de censistas ordenados alfabéticamente por apellido y nombre"
+		   "\n3. Localidad con más ausentes"
+		   "\n4. Censista cuya zona fue la más censada"
+		   "\n5. Promedio de censos"
+		   "\n6. Volver al menú principal\n");
+}
+
+void submenuInformar2(void) {
+	printf("\n1. Alberti"
+		   "\n2. Balcarce"
+		   "\n3. Campana"
+		   "\n4. Dolores"
+		   "\n5. Volver al submenú Informes\n");
+}
+
+void submenuInformar5(void) {
+	printf("\n1. Por censista"
+		   "\n2. Por zona"
+		   "\n3. Volver al submenú Informes\n");
 }

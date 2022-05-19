@@ -11,4 +11,9 @@
 
 int printZonasCensoExt(ZonaCenso *zonasCenso, Censista *censistas, int largo);
 
+
+int informar1(Censista *censistas, ZonaCenso *zonasCenso, int largo);
+int informar3(ZonaCenso *zonasCenso, int largo);
+int informar4(ZonaCenso *zonasCenso, Censista *censistas, int largo);
+
 #endif /* INFORMES_H_ */
