@@ -1,13 +1,11 @@
 #include "Parser.h"
 
 
-/** \brief Parsea los datos los datos de los pasajeros desde el archivo data.csv (modo texto).
- *
- * \param path char*
- * \param pArrayListPassenger LinkedList*
- * \return int
- *
- */
+/// @brief
+///
+/// @param pFile
+/// @param pArrayListPassenger
+/// @return
 int parser_PassengerFromText(FILE* pFile , LinkedList* pArrayListPassenger) {
 	int Return = -1;
 	char header[1024];
@@ -18,7 +16,7 @@ int parser_PassengerFromText(FILE* pFile , LinkedList* pArrayListPassenger) {
 	char flyCode[1024];
 	char typePassenger[1024];
 	char flightStatus[1024];
-	Passenger* pP;
+	Passenger* pP = NULL;
 	if(pFile != NULL && pArrayListPassenger != NULL) {
 		fscanf(pFile, "%s", header);
 		do {
@@ -33,16 +31,14 @@ int parser_PassengerFromText(FILE* pFile , LinkedList* pArrayListPassenger) {
 	return Return;
 }
 
-/** \brief Parsea los datos los datos de los pasajeros desde el archivo data.csv (modo binario).
- *
- * \param path char*
- * \param pArrayListPassenger LinkedList*
- * \return int
- *
- */
+/// @brief
+///
+/// @param pFile
+/// @param pArrayListPassenger
+/// @return
 int parser_PassengerFromBinary(FILE* pFile , LinkedList* pArrayListPassenger){
 	int Return = -1;
-	Passenger* pP;
+	Passenger* pP = NULL;
 	int id;
 	char name[NAME_LENGHT];
 	char lastName[LASTNAME_LENGHT];

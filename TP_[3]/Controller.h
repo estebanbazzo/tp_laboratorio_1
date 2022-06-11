@@ -7,6 +7,10 @@
 #include "Parser.h"
 
 
+#ifndef CONTROLLER_H_
+#define CONTROLLER_H_
+
+
 int controller_loadFromText(char* path , LinkedList* pArrayListPassenger);
 int controller_loadFromBinary(char* path , LinkedList* pArrayListPassenger);
 int controller_addPassenger(LinkedList* pArrayListPassenger);
@@ -16,6 +20,6 @@ int controller_ListPassenger(LinkedList* pArrayListPassenger);
 int controller_sortPassenger(LinkedList* pArrayListPassenger);
 int controller_saveAsText(char* path , LinkedList* pArrayListPassenger);
 int controller_saveAsBinary(char* path , LinkedList* pArrayListPassenger);
-int controller_getLastId(char* path, char* id);
-int controller_lastIdPlusPlus(char* id);
-int controller_refreshLastId(char* path, char* id);
+
+
+#endif /* CONTROLLER_H_ */

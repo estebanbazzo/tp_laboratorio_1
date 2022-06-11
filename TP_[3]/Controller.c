@@ -1,16 +1,19 @@
 #include "Controller.h"
 
 
-/** \brief Carga los datos de los pasajeros desde el archivo data.csv (modo texto).
- *
- * \param path char*
- * \param pArrayListPassenger LinkedList*
- * \return int
- *
- */
+static int controller_getLastId(char* path, char* id);
+static int controller_lastIdPlusPlus(char* id);
+static int controller_refreshLastId(char* path, char* id);
+
+
+/// @brief
+///
+/// @param path
+/// @param pArrayListPassenger
+/// @return
 int controller_loadFromText(char* path , LinkedList* pArrayListPassenger) {
 	int Return = -1;
-	FILE* pTxtFile;
+	FILE* pTxtFile = NULL;
 	if(path != NULL && pArrayListPassenger != NULL) {
 		if((pTxtFile = fopen(path, "r")) != NULL) {
 			if(!parser_PassengerFromText(pTxtFile, pArrayListPassenger)) {
@@ -22,16 +25,14 @@ int controller_loadFromText(char* path , LinkedList* pArrayListPassenger) {
 	return Return;
 }
 
-/** \brief Carga los datos de los pasajeros desde el archivo data.csv (modo binario).
- *
- * \param path char*
- * \param pArrayListPassenger LinkedList*
- * \return int
- *
- */
+/// @brief
+///
+/// @param path
+/// @param pArrayListPassenger
+/// @return
 int controller_loadFromBinary(char* path , LinkedList* pArrayListPassenger) {
 	int Return = -1;
-	FILE* pBinFile;
+	FILE* pBinFile = NULL;
 	if(path != NULL && pArrayListPassenger != NULL) {
 		if((pBinFile = fopen(path, "rb")) != NULL) {
 			if(!parser_PassengerFromBinary(pBinFile, pArrayListPassenger)) {
@@ -43,13 +44,10 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListPassenger) {
 	return Return;
 }
 
-/** \brief Alta de pasajero
- *
- * \param path char*
- * \param pArrayListPassenger LinkedList*
- * \return int
- *
- */
+/// @brief
+///
+/// @param pArrayListPassenger
+/// @return
 int controller_addPassenger(LinkedList* pArrayListPassenger) {
 	int Return = -1;
 	char auxId[128];
@@ -59,15 +57,15 @@ int controller_addPassenger(LinkedList* pArrayListPassenger) {
 	int auxTypePassenger;
 	char auxFlyCode[FLYCODE_LENGHT];
 	int auxFlightStatus;
-	Passenger* pP;
+	Passenger* pP = NULL;
 	if(pArrayListPassenger != NULL) {
 		if (!controller_getLastId("lastId.csv", auxId) && !controller_lastIdPlusPlus(auxId)) {
 			if(!utn_getName(auxName, NAME_LENGHT, "Ingrese el nombre: ", "Error: el nombre ingresado es inválido", 3) &&
 			   !utn_getName(auxLastName, LASTNAME_LENGHT, "Ingrese el apellido: ", "Error: el apellido ingresado es inválido", 3) &&
 			   !utn_getFloat(&auxPrice, "Ingrese el precio: ", "Error: el precio ingresado es inválido", 0.01, -1, 3) &&
-			   !utn_getInt(&auxTypePassenger, "Ingrese el tipo (10/20/30): ", "Error: el tipo ingresado es inválido", 10, 30, 3) &&
+			   !utn_getInt(&auxTypePassenger, "Ingrese el tipo (1-FirstClass/2-ExecutiveClass/3-EconomyClass): ", "Error: el tipo ingresado es inválido", 1, 3, 3) &&
 			   !utn_getCode(auxFlyCode, FLYCODE_LENGHT, "Ingrese el código: ", "Error: el código ingresado es inválido", 3) &&
-			   !utn_getInt(&auxFlightStatus, "Ingrese el estado (100/200/300/400): ", "Error: el estado ingresado es inválido", 100, 400, 3)) {
+			   !utn_getInt(&auxFlightStatus, "Ingrese el estado (1-En Vuelo/2-En Horario/3-Demorado/4-Aterrizado): ", "Error: el estado ingresado es inválido", 1, 4, 3)) {
 				if((pP = Passenger_new()) != NULL) {
 					if(!Passenger_setId(pP, atoi(auxId)) &&
 					   !Passenger_setNombre(pP, auxName) &&
@@ -90,9 +88,14 @@ int controller_addPassenger(LinkedList* pArrayListPassenger) {
 	}
 	return Return;
 }
-int controller_getLastId(char* path, char* id) {
+/// @brief
+///
+/// @param path
+/// @param id
+/// @return
+static int controller_getLastId(char* path, char* id) {
 	int Return = -1;
-	FILE* idFile;
+	FILE* idFile = NULL;
 	if(id != NULL && (idFile = fopen(path, "r")) != NULL) {
 		fscanf(idFile, "%[^\n]\n", id);
 		fclose(idFile);
@@ -100,7 +103,11 @@ int controller_getLastId(char* path, char* id) {
 	}
 	return Return;
 }
-int controller_lastIdPlusPlus(char* id) {
+/// @brief
+///
+/// @param id
+/// @return
+static int controller_lastIdPlusPlus(char* id) {
 	int idToIncrease;
 	int Return = -1;
 	if(id != NULL) {
@@ -111,8 +118,13 @@ int controller_lastIdPlusPlus(char* id) {
 	}
 	return Return;
 }
-int controller_refreshLastId(char* path, char* id) {
-	FILE* idFile;
+/// @brief
+///
+/// @param path
+/// @param id
+/// @return
+static int controller_refreshLastId(char* path, char* id) {
+	FILE* idFile = NULL;
 	int Return = -1;
 	if(id != NULL && (idFile = fopen(path, "w")) != NULL) {
 		fprintf(idFile, "%s\n", id);
@@ -122,13 +134,10 @@ int controller_refreshLastId(char* path, char* id) {
 	return Return;
 }
 
-/** \brief Modificar datos de pasajero
- *
- * \param path char*
- * \param pArrayListPassenger LinkedList*
- * \return int
- *
- */
+/// @brief
+///
+/// @param pArrayListPassenger
+/// @return
 int controller_editPassenger(LinkedList* pArrayListPassenger) {
 	int Return = -1;
 	int id;
@@ -139,7 +148,7 @@ int controller_editPassenger(LinkedList* pArrayListPassenger) {
 	int auxTypePassenger;
 	char auxFlyCode[FLYCODE_LENGHT];
 	int auxFlightStatus;
-	Passenger* pP;
+	Passenger* pP = NULL;
 	if(pArrayListPassenger != NULL) {
 		if(!utn_getInt(&auxId, "Ingrese el ID del pasajero a modificar: ", "Error: el ID ingresado es inválido", 1, -1, 3)) {
 			for(int i = 0; i < ll_len(pArrayListPassenger); i++) {
@@ -155,9 +164,9 @@ int controller_editPassenger(LinkedList* pArrayListPassenger) {
 					if(!utn_getName(auxName, NAME_LENGHT, "Ingrese el nombre: ", "Error: el nombre ingresado es inválido", 3) &&
 					   !utn_getName(auxLastName, LASTNAME_LENGHT, "Ingrese el apellido: ", "Error: el apellido ingresado es inválido", 3) &&
 					   !utn_getFloat(&auxPrice, "Ingrese el precio: ", "Error: el precio ingresado es inválido", 0.01, -1, 3) &&
-					   !utn_getInt(&auxTypePassenger, "Ingrese el tipo (10/20/30): ", "Error: el tipo ingresado es inválido", 10, 30, 3) &&
+					   !utn_getInt(&auxTypePassenger, "Ingrese el tipo (1-FirstClass/2-ExecutiveClass/3-EconomyClass): ", "Error: el tipo ingresado es inválido", 1, 3, 3) &&
 					   !utn_getCode(auxFlyCode, FLYCODE_LENGHT, "Ingrese el código: ", "Error: el código ingresado es inválido", 3) &&
-					   !utn_getInt(&auxFlightStatus, "Ingrese el estado (100/200/300/400): ", "Error: el estado ingresado es inválido", 100, 400, 3)) {
+					   !utn_getInt(&auxFlightStatus, "Ingrese el estado (1-En Vuelo/2-En Horario/3-Demorado/4-Aterrizado): ", "Error: el estado ingresado es inválido", 1, 4, 3)) {
 						if(!Passenger_setNombre(pP, auxName) &&
 						   !Passenger_setApellido(pP, auxLastName) &&
 						   !Passenger_setPrecio(pP, auxPrice) &&
@@ -175,18 +184,15 @@ int controller_editPassenger(LinkedList* pArrayListPassenger) {
 	return Return;
 }
 
-/** \brief Baja de pasajero
- *
- * \param path char*
- * \param pArrayListPassenger LinkedList*
- * \return int
- *
- */
+/// @brief
+///
+/// @param pArrayListPassenger
+/// @return
 int controller_removePassenger(LinkedList* pArrayListPassenger) {
 	int Return = -1;
 	int id;
 	int auxId;
-	Passenger* pP;
+	Passenger* pP = NULL;
 	if(pArrayListPassenger != NULL) {
 		if(!utn_getInt(&auxId, "Ingrese el ID del pasajero a eliminar: ", "Error: el ID ingresado es inválido", 1, -1, 3)) {
 			for(int i = 0; i < ll_len(pArrayListPassenger); i++) {
@@ -204,16 +210,13 @@ int controller_removePassenger(LinkedList* pArrayListPassenger) {
 	return Return;
 }
 
-/** \brief Listar pasajeros
- *
- * \param path char*
- * \param pArrayListPassenger LinkedList*
- * \return int
- *
- */
+/// @brief
+///
+/// @param pArrayListPassenger
+/// @return
 int controller_ListPassenger(LinkedList* pArrayListPassenger) {
 	int Return = -1;
-	Passenger* pP;
+	Passenger* pP = NULL;
 	int id;
 	char name[NAME_LENGHT];
 	char lastName[LASTNAME_LENGHT];
@@ -266,13 +269,10 @@ int controller_ListPassenger(LinkedList* pArrayListPassenger) {
 	return Return;
 }
 
-/** \brief Ordenar pasajeros
- *
- * \param path char*
- * \param pArrayListPassenger LinkedList*
- * \return int
- *
- */
+/// @brief
+///
+/// @param pArrayListPassenger
+/// @return
 int controller_sortPassenger(LinkedList* pArrayListPassenger) {
 	int Return = -1;
 	int option;
@@ -376,17 +376,15 @@ int controller_sortPassenger(LinkedList* pArrayListPassenger) {
 	return Return;
 }
 
-/** \brief Guarda los datos de los pasajeros en el archivo data.csv (modo texto).
- *
- * \param path char*
- * \param pArrayListPassenger LinkedList*
- * \return int
- *
- */
+/// @brief
+///
+/// @param path
+/// @param pArrayListPassenger
+/// @return
 int controller_saveAsText(char* path , LinkedList* pArrayListPassenger) {
 	int Return = -1;
-	FILE* pTxtFile;
-	Passenger* pP;
+	FILE* pTxtFile = NULL;
+	Passenger* pP = NULL;
 	int id;
 	char name[NAME_LENGHT];
 	char lastName[LASTNAME_LENGHT];
@@ -444,17 +442,15 @@ int controller_saveAsText(char* path , LinkedList* pArrayListPassenger) {
 	return Return;
 }
 
-/** \brief Guarda los datos de los pasajeros en el archivo data.csv (modo binario).
- *
- * \param path char*
- * \param pArrayListPassenger LinkedList*
- * \return int
- *
- */
+/// @brief
+///
+/// @param path
+/// @param pArrayListPassenger
+/// @return
 int controller_saveAsBinary(char* path , LinkedList* pArrayListPassenger) {
 	int Return = -1;
-	FILE* pBinFile;
-	Passenger* pP;
+	FILE* pBinFile = NULL;
+	Passenger* pP = NULL;
 	if(path != NULL && pArrayListPassenger != NULL) {
 		if((pBinFile = fopen(path, "wb")) != NULL) {
 			for(int i = 0; i < ll_len(pArrayListPassenger); i++) {

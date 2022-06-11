@@ -1,6 +1,9 @@
 #include "Passenger.h"
 
 
+/// @brief
+///
+/// @return
 Passenger* Passenger_new() {
 	Passenger* pP = NULL;
 	if((pP = (Passenger*)malloc(sizeof(Passenger) *1)) != NULL) {
@@ -15,6 +18,16 @@ Passenger* Passenger_new() {
 	return pP;
 }
 
+/// @brief
+///
+/// @param idStr
+/// @param nameStr
+/// @param lastNameStr
+/// @param priceStr
+/// @param flyCodeStr
+/// @param typePassengerStr
+/// @param flightStatusStr
+/// @return
 Passenger* Passenger_newParametros(char* idStr, char* nameStr, char* lastNameStr, char* priceStr, char* flyCodeStr, char* typePassengerStr, char* flightStatusStr) {
 	Passenger* pP = NULL;
 	Passenger* auxPP = NULL;
@@ -60,12 +73,20 @@ Passenger* Passenger_newParametros(char* idStr, char* nameStr, char* lastNameStr
 	return pP;
 }
 
+/// @brief
+///
+/// @param this
 void Passenger_delete(Passenger* this) {
 	if(this != NULL) {
 		free(this);
 	}
 }
 
+/// @brief
+///
+/// @param this
+/// @param id
+/// @return
 int Passenger_setId(Passenger* this, int id) {
 	int Return = -1;
 	if(this != NULL && id > 0) {
@@ -75,6 +96,11 @@ int Passenger_setId(Passenger* this, int id) {
 	return Return;
 }
 
+/// @brief
+///
+/// @param this
+/// @param id
+/// @return
 int Passenger_getId(Passenger* this, int* id) {
 	int Return = -1;
 	if(this != NULL && id != NULL) {
@@ -84,6 +110,11 @@ int Passenger_getId(Passenger* this, int* id) {
 	return Return;
 }
 
+/// @brief
+///
+/// @param this
+/// @param nombre
+/// @return
 int Passenger_setNombre(Passenger* this, char* nombre) {
 	int Return = -1;
 	if(this != NULL && !isName(nombre, sizeof(nombre))) {
@@ -93,6 +124,11 @@ int Passenger_setNombre(Passenger* this, char* nombre) {
 	return Return;
 }
 
+/// @brief
+///
+/// @param this
+/// @param nombre
+/// @return
 int Passenger_getNombre(Passenger* this, char* nombre) {
 	int Return = -1;
 	if(this != NULL && nombre != NULL) {
@@ -102,6 +138,11 @@ int Passenger_getNombre(Passenger* this, char* nombre) {
 	return Return;
 }
 
+/// @brief
+///
+/// @param this
+/// @param apellido
+/// @return
 int Passenger_setApellido(Passenger* this, char* apellido) {
 	int Return = -1;
 	if(this != NULL && !isName(apellido, sizeof(apellido))) {
@@ -111,6 +152,11 @@ int Passenger_setApellido(Passenger* this, char* apellido) {
 	return Return;
 }
 
+/// @brief
+///
+/// @param this
+/// @param apellido
+/// @return
 int Passenger_getApellido(Passenger* this, char* apellido) {
 	int Return = -1;
 	if(this != NULL && apellido != NULL) {
@@ -120,6 +166,11 @@ int Passenger_getApellido(Passenger* this, char* apellido) {
 	return Return;
 }
 
+/// @brief
+///
+/// @param this
+/// @param codigoVuelo
+/// @return
 int Passenger_setCodigoVuelo(Passenger* this, char* codigoVuelo) {
 	int Return = -1;
 	if(this != NULL && !isCode(codigoVuelo, sizeof(codigoVuelo))) {
@@ -129,6 +180,11 @@ int Passenger_setCodigoVuelo(Passenger* this, char* codigoVuelo) {
 	return Return;
 }
 
+/// @brief
+///
+/// @param this
+/// @param codigoVuelo
+/// @return
 int Passenger_getCodigoVuelo(Passenger* this, char* codigoVuelo) {
 	int Return = -1;
 	if(this != NULL && codigoVuelo != NULL) {
@@ -138,6 +194,11 @@ int Passenger_getCodigoVuelo(Passenger* this, char* codigoVuelo) {
 	return Return;
 }
 
+/// @brief
+///
+/// @param this
+/// @param tipoPasajero
+/// @return
 int Passenger_setTipoPasajero(Passenger* this, int tipoPasajero) {
 	int Return = -1;
 	if(this != NULL && tipoPasajero > 0) {
@@ -147,6 +208,11 @@ int Passenger_setTipoPasajero(Passenger* this, int tipoPasajero) {
 	return Return;
 }
 
+/// @brief
+///
+/// @param this
+/// @param tipoPasajero
+/// @return
 int Passenger_getTipoPasajero(Passenger* this, int* tipoPasajero) {
 	int Return = -1;
 	if(this != NULL && tipoPasajero != NULL) {
@@ -156,6 +222,11 @@ int Passenger_getTipoPasajero(Passenger* this, int* tipoPasajero) {
 	return Return;
 }
 
+/// @brief
+///
+/// @param this
+/// @param precio
+/// @return
 int Passenger_setPrecio(Passenger* this, float precio) {
 	int Return = -1;
 	if(this != NULL && precio > 0) {
@@ -165,6 +236,11 @@ int Passenger_setPrecio(Passenger* this, float precio) {
 	return Return;
 }
 
+/// @brief
+///
+/// @param this
+/// @param precio
+/// @return
 int Passenger_getPrecio(Passenger* this, float* precio) {
 	int Return = -1;
 	if(this != NULL && precio != NULL) {
@@ -174,6 +250,11 @@ int Passenger_getPrecio(Passenger* this, float* precio) {
 	return Return;
 }
 
+/// @brief
+///
+/// @param this
+/// @param estadoVuelo
+/// @return
 int Passenger_setEstadoVuelo(Passenger* this, int estadoVuelo) {
 	int Return = -1;
 	if(this != NULL && estadoVuelo >= AIRBORNE) {
@@ -183,6 +264,11 @@ int Passenger_setEstadoVuelo(Passenger* this, int estadoVuelo) {
 	return Return;
 }
 
+/// @brief
+///
+/// @param this
+/// @param estadoVuelo
+/// @return
 int Passenger_getEstadoVuelo(Passenger* this, int* estadoVuelo) {
 	int Return = -1;
 	if(this != NULL && estadoVuelo != NULL) {
@@ -192,11 +278,15 @@ int Passenger_getEstadoVuelo(Passenger* this, int* estadoVuelo) {
 	return Return;
 }
 
-
+/// @brief
+///
+/// @param passenger1
+/// @param passenger2
+/// @return
 int passenger_sortById(void* passenger1, void* passenger2) {
 	int Return;
-	Passenger* pP1;
-	Passenger* pP2;
+	Passenger* pP1 = NULL;
+	Passenger* pP2 = NULL;
 	int id1;
 	int id2;
 	if(passenger1 != NULL && passenger2 != NULL) {
@@ -214,10 +304,15 @@ int passenger_sortById(void* passenger1, void* passenger2) {
 	return Return;
 }
 
+/// @brief
+///
+/// @param passenger1
+/// @param passenger2
+/// @return
 int passenger_sortByName(void* passenger1, void* passenger2) {
 	int Return = -1;
-	Passenger* pP1;
-	Passenger* pP2;
+	Passenger* pP1 = NULL;
+	Passenger* pP2 = NULL;
 	char name1[NAME_LENGHT];
 	char name2[NAME_LENGHT];
 	if(passenger1 != NULL && passenger2 != NULL) {
@@ -230,10 +325,15 @@ int passenger_sortByName(void* passenger1, void* passenger2) {
 	return Return;
 }
 
+/// @brief
+///
+/// @param passenger1
+/// @param passenger2
+/// @return
 int passenger_sortByLastName(void* passenger1, void* passenger2) {
 	int Return = -1;
-	Passenger* pP1;
-	Passenger* pP2;
+	Passenger* pP1 = NULL;
+	Passenger* pP2 = NULL;
 	char lastName1[LASTNAME_LENGHT];
 	char lastName2[LASTNAME_LENGHT];
 	if(passenger1 != NULL && passenger2 != NULL) {
@@ -246,10 +346,15 @@ int passenger_sortByLastName(void* passenger1, void* passenger2) {
 	return Return;
 }
 
+/// @brief
+///
+/// @param passenger1
+/// @param passenger2
+/// @return
 int passenger_sortByTypePassenger(void* passenger1, void* passenger2) {
 	int Return;
-	Passenger* pP1;
-	Passenger* pP2;
+	Passenger* pP1 = NULL;
+	Passenger* pP2 = NULL;
 	int typePassenger1;
 	int typePassenger2;
 	if(passenger1 != NULL && passenger2 != NULL) {
@@ -267,10 +372,15 @@ int passenger_sortByTypePassenger(void* passenger1, void* passenger2) {
 	return Return;
 }
 
+/// @brief
+///
+/// @param passenger1
+/// @param passenger2
+/// @return
 int passenger_sortByPrice(void* passenger1, void* passenger2) {
 	int Return;
-	Passenger* pP1;
-	Passenger* pP2;
+	Passenger* pP1 = NULL;
+	Passenger* pP2 = NULL;
 	float price1;
 	float price2;
 	if(passenger1 != NULL && passenger2 != NULL) {
@@ -288,10 +398,15 @@ int passenger_sortByPrice(void* passenger1, void* passenger2) {
 	return Return;
 }
 
+/// @brief
+///
+/// @param passenger1
+/// @param passenger2
+/// @return
 int passenger_sortByFlyCode(void* passenger1, void* passenger2) {
 	int Return = -1;
-	Passenger* pP1;
-	Passenger* pP2;
+	Passenger* pP1 = NULL;
+	Passenger* pP2 = NULL;
 	char flyCode1[FLYCODE_LENGHT];
 	char flyCode2[FLYCODE_LENGHT];
 	if(passenger1 != NULL && passenger2 != NULL) {
@@ -304,10 +419,15 @@ int passenger_sortByFlyCode(void* passenger1, void* passenger2) {
 	return Return;
 }
 
+/// @brief
+///
+/// @param passenger1
+/// @param passenger2
+/// @return
 int passenger_sortByFlightStatus(void* passenger1, void* passenger2) {
 	int Return;
-	Passenger* pP1;
-	Passenger* pP2;
+	Passenger* pP1 = NULL;
+	Passenger* pP2 = NULL;
 	int flightStatus1;
 	int flightStatus2;
 	if(passenger1 != NULL && passenger2 != NULL) {
