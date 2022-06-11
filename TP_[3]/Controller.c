@@ -60,12 +60,12 @@ int controller_addPassenger(LinkedList* pArrayListPassenger) {
 	Passenger* pP = NULL;
 	if(pArrayListPassenger != NULL) {
 		if (!controller_getLastId("lastId.csv", auxId) && !controller_lastIdPlusPlus(auxId)) {
-			if(!utn_getName(auxName, NAME_LENGHT, "Ingrese el nombre: ", "Error: el nombre ingresado es inválido", 3) &&
-			   !utn_getName(auxLastName, LASTNAME_LENGHT, "Ingrese el apellido: ", "Error: el apellido ingresado es inválido", 3) &&
-			   !utn_getFloat(&auxPrice, "Ingrese el precio: ", "Error: el precio ingresado es inválido", 0.01, -1, 3) &&
-			   !utn_getInt(&auxTypePassenger, "Ingrese el tipo (1-FirstClass/2-ExecutiveClass/3-EconomyClass): ", "Error: el tipo ingresado es inválido", 1, 3, 3) &&
-			   !utn_getCode(auxFlyCode, FLYCODE_LENGHT, "Ingrese el código: ", "Error: el código ingresado es inválido", 3) &&
-			   !utn_getInt(&auxFlightStatus, "Ingrese el estado (1-En Vuelo/2-En Horario/3-Demorado/4-Aterrizado): ", "Error: el estado ingresado es inválido", 1, 4, 3)) {
+			if(!utn_getName(auxName, NAME_LENGHT, "\nIngrese el nombre: ", "\nError: el nombre ingresado es inválido", 3) &&
+			   !utn_getName(auxLastName, LASTNAME_LENGHT, "Ingrese el apellido: ", "\nError: el apellido ingresado es inválido", 3) &&
+			   !utn_getFloat(&auxPrice, "Ingrese el precio: ", "\nError: el precio ingresado es inválido", 0.01, -1, 3) &&
+			   !utn_getInt(&auxTypePassenger, "Ingrese el tipo (1-FirstClass/2-ExecutiveClass/3-EconomyClass): ", "\nError: el tipo ingresado es inválido", 1, 3, 3) &&
+			   !utn_getCode(auxFlyCode, FLYCODE_LENGHT, "Ingrese el código: ", "\nError: el código ingresado es inválido", 3) &&
+			   !utn_getInt(&auxFlightStatus, "Ingrese el estado (1-En Vuelo/2-En Horario/3-Demorado/4-Aterrizado): ", "\nError: el estado ingresado es inválido", 1, 4, 3)) {
 				if((pP = Passenger_new()) != NULL) {
 					if(!Passenger_setId(pP, atoi(auxId)) &&
 					   !Passenger_setNombre(pP, auxName) &&
@@ -150,7 +150,7 @@ int controller_editPassenger(LinkedList* pArrayListPassenger) {
 	int auxFlightStatus;
 	Passenger* pP = NULL;
 	if(pArrayListPassenger != NULL) {
-		if(!utn_getInt(&auxId, "Ingrese el ID del pasajero a modificar: ", "Error: el ID ingresado es inválido", 1, -1, 3)) {
+		if(!utn_getInt(&auxId, "\nIngrese el ID del pasajero a modificar: ", "\nError: el ID ingresado es inválido", 1, -1, 3)) {
 			for(int i = 0; i < ll_len(pArrayListPassenger); i++) {
 				pP = (Passenger*)ll_get(pArrayListPassenger, i);
 				Passenger_getId(pP, &id);
@@ -161,12 +161,12 @@ int controller_editPassenger(LinkedList* pArrayListPassenger) {
 				Passenger_getCodigoVuelo(pP, auxFlyCode);
 				Passenger_getEstadoVuelo(pP, &auxFlightStatus);
 				if(auxId == id) {
-					if(!utn_getName(auxName, NAME_LENGHT, "Ingrese el nombre: ", "Error: el nombre ingresado es inválido", 3) &&
-					   !utn_getName(auxLastName, LASTNAME_LENGHT, "Ingrese el apellido: ", "Error: el apellido ingresado es inválido", 3) &&
-					   !utn_getFloat(&auxPrice, "Ingrese el precio: ", "Error: el precio ingresado es inválido", 0.01, -1, 3) &&
-					   !utn_getInt(&auxTypePassenger, "Ingrese el tipo (1-FirstClass/2-ExecutiveClass/3-EconomyClass): ", "Error: el tipo ingresado es inválido", 1, 3, 3) &&
-					   !utn_getCode(auxFlyCode, FLYCODE_LENGHT, "Ingrese el código: ", "Error: el código ingresado es inválido", 3) &&
-					   !utn_getInt(&auxFlightStatus, "Ingrese el estado (1-En Vuelo/2-En Horario/3-Demorado/4-Aterrizado): ", "Error: el estado ingresado es inválido", 1, 4, 3)) {
+					if(!utn_getName(auxName, NAME_LENGHT, "Ingrese el nuevo nombre: ", "\nError: el nuevo nombre ingresado es inválido", 3) &&
+					   !utn_getName(auxLastName, LASTNAME_LENGHT, "Ingrese el nuevo apellido: ", "\nError: el nuevo apellido ingresado es inválido", 3) &&
+					   !utn_getFloat(&auxPrice, "Ingrese el nuevo precio: ", "\nError: el nuevo precio ingresado es inválido", 0.01, -1, 3) &&
+					   !utn_getInt(&auxTypePassenger, "Ingrese el nuevo tipo (1-FirstClass/2-ExecutiveClass/3-EconomyClass): ", "\nError: el nuevo tipo ingresado es inválido", 1, 3, 3) &&
+					   !utn_getCode(auxFlyCode, FLYCODE_LENGHT, "Ingrese el nuevo código: ", "\nError: el nuevo código ingresado es inválido", 3) &&
+					   !utn_getInt(&auxFlightStatus, "Ingrese el nuevo estado (1-En Vuelo/2-En Horario/3-Demorado/4-Aterrizado): ", "\nError: el nuevo estado ingresado es inválido", 1, 4, 3)) {
 						if(!Passenger_setNombre(pP, auxName) &&
 						   !Passenger_setApellido(pP, auxLastName) &&
 						   !Passenger_setPrecio(pP, auxPrice) &&
@@ -194,7 +194,7 @@ int controller_removePassenger(LinkedList* pArrayListPassenger) {
 	int auxId;
 	Passenger* pP = NULL;
 	if(pArrayListPassenger != NULL) {
-		if(!utn_getInt(&auxId, "Ingrese el ID del pasajero a eliminar: ", "Error: el ID ingresado es inválido", 1, -1, 3)) {
+		if(!utn_getInt(&auxId, "\nIngrese el ID del pasajero a eliminar: ", "\nError: el ID ingresado es inválido", 1, -1, 3)) {
 			for(int i = 0; i < ll_len(pArrayListPassenger); i++) {
 				pP = (Passenger*)ll_get(pArrayListPassenger, i);
 				Passenger_getId(pP, &id);
@@ -287,14 +287,14 @@ int controller_sortPassenger(LinkedList* pArrayListPassenger) {
 				   "\n6. Ordenar por código de vuelo"
 				   "\n7. Ordenar por estado del vuelo"
 				   "\n8. Volver al menú principal\n");
-			if(!utn_getInt(&option, "Ingrese una opción del submenú modificar: ", "Error: la opción ingresada es inválida", 1, 8, -1)) {
+			if(!utn_getInt(&option, "\nIngrese una opción del submenú modificar: ", "\nError: la opción ingresada es inválida", 1, 8, -1)) {
 				switch(option) {
 				case 1:
 					do {
 						printf("\n0. Descendentemente"
 							   "\n1. Ascendentemente"
 							   "\n2. Volver al submenú modificar\n");
-						if(!utn_getInt(&subOption, "Ingrese una opción del submenú modificar: ", "Error: la opción ingresada es inválida", 0, 2, -1)) {
+						if(!utn_getInt(&subOption, "\nIngrese una opción del submenú modificar: ", "\nError: la opción ingresada es inválida", 0, 2, -1)) {
 							ll_sort(pArrayListPassenger, passenger_sortById, subOption);
 						}
 					} while(subOption != 2);
@@ -305,7 +305,7 @@ int controller_sortPassenger(LinkedList* pArrayListPassenger) {
 						printf("\n0. Descendentemente"
 							   "\n1. Ascendentemente"
 							   "\n2. Volver al submenú modificar\n");
-						if(!utn_getInt(&subOption, "Ingrese una opción del submenú modificar: ", "Error: la opción ingresada es inválida", 0, 2, -1)) {
+						if(!utn_getInt(&subOption, "\nIngrese una opción del submenú modificar: ", "\nError: la opción ingresada es inválida", 0, 2, -1)) {
 							ll_sort(pArrayListPassenger, passenger_sortByName, subOption);
 						}
 					} while(subOption != 2);
@@ -316,7 +316,7 @@ int controller_sortPassenger(LinkedList* pArrayListPassenger) {
 						printf("\n0. Descendentemente"
 							   "\n1. Ascendentemente"
 							   "\n2. Volver al submenú modificar\n");
-						if(!utn_getInt(&subOption, "Ingrese una opción del submenú modificar: ", "Error: la opción ingresada es inválida", 0, 2, -1)) {
+						if(!utn_getInt(&subOption, "\nIngrese una opción del submenú modificar: ", "\nError: la opción ingresada es inválida", 0, 2, -1)) {
 							ll_sort(pArrayListPassenger, passenger_sortByLastName, subOption);
 						}
 					} while(subOption != 2);
@@ -327,7 +327,7 @@ int controller_sortPassenger(LinkedList* pArrayListPassenger) {
 						printf("\n0. Descendentemente"
 							   "\n1. Ascendentemente"
 							   "\n2. Volver al submenú modificar\n");
-						if(!utn_getInt(&subOption, "Ingrese una opción del submenú modificar: ", "Error: la opción ingresada es inválida", 0, 2, -1)) {
+						if(!utn_getInt(&subOption, "\nIngrese una opción del submenú modificar: ", "\nError: la opción ingresada es inválida", 0, 2, -1)) {
 							ll_sort(pArrayListPassenger, passenger_sortByTypePassenger, subOption);
 						}
 					} while(subOption != 2);
@@ -338,7 +338,7 @@ int controller_sortPassenger(LinkedList* pArrayListPassenger) {
 						printf("\n0. Descendentemente"
 							   "\n1. Ascendentemente"
 							   "\n2. Volver al submenú modificar\n");
-						if(!utn_getInt(&subOption, "Ingrese una opción del submenú modificar: ", "Error: la opción ingresada es inválida", 0, 2, -1)) {
+						if(!utn_getInt(&subOption, "\nIngrese una opción del submenú modificar: ", "\nError: la opción ingresada es inválida", 0, 2, -1)) {
 							ll_sort(pArrayListPassenger, passenger_sortByPrice, subOption);
 						}
 					} while(subOption != 2);
@@ -349,7 +349,7 @@ int controller_sortPassenger(LinkedList* pArrayListPassenger) {
 						printf("\n0. Descendentemente"
 							   "\n1. Ascendentemente"
 							   "\n2. Volver al submenú modificar\n");
-						if(!utn_getInt(&subOption, "Ingrese una opción del submenú modificar: ", "Error: la opción ingresada es inválida", 0, 2, -1)) {
+						if(!utn_getInt(&subOption, "\nIngrese una opción del submenú modificar: ", "\nError: la opción ingresada es inválida", 0, 2, -1)) {
 							ll_sort(pArrayListPassenger, passenger_sortByFlyCode, subOption);
 						}
 					} while(subOption != 2);
@@ -360,7 +360,7 @@ int controller_sortPassenger(LinkedList* pArrayListPassenger) {
 						printf("\n0. Descendentemente"
 							   "\n1. Ascendentemente"
 							   "\n2. Volver al submenú modificar\n");
-						if(!utn_getInt(&subOption, "Ingrese una opción del submenú modificar: ", "Error: la opción ingresada es inválida", 0, 2, -1)) {
+						if(!utn_getInt(&subOption, "\nIngrese una opción del submenú modificar: ", "\nError: la opción ingresada es inválida", 0, 2, -1)) {
 							ll_sort(pArrayListPassenger, passenger_sortByFlightStatus, subOption);
 						}
 					} while(subOption != 2);

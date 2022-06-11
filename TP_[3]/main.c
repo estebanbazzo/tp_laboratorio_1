@@ -31,14 +31,17 @@ int main(void) {
 					if(!controller_loadFromText(CSV_FILE, passengers)) {
 						flagLoadedFile = TRUE;
 						flagSavedFile = FALSE;
-						printf("Archivo data.csv cargado correctamente");
+						printf("\nArchivo data.csv cargado correctamente. ");
+						utn_anyKey("para continuar");
 					}
 					else {
-						printf("\nError: el archivo data.csv no existe o no pudo cargarse");
+						printf("\nError: el archivo data.csv no existe o no pudo cargarse. ");
+						utn_anyKey("para continuar");
 					}
 				}
 				else {
-					printf("\nError: los datos de los pasajeros ya fueron cargados desde el archivo data.csv");
+					printf("\nError: los datos de los pasajeros ya fueron cargados desde el archivo data.csv. ");
+					utn_anyKey("para continuar");
 				}
 				break;
 
@@ -47,14 +50,17 @@ int main(void) {
 					if(!controller_loadFromBinary(BIN_FILE, passengers)) {
 						flagLoadedFile = TRUE;
 						flagSavedFile = FALSE;
-						printf("Archivo data.bin cargado correctamente");
+						printf("\nArchivo data.bin cargado correctamente. ");
+						utn_anyKey("para continuar");
 					}
 					else {
-						printf("\nError: el archivo data.bin no existe o no pudo cargarse");
+						printf("\nError: el archivo data.bin no existe o no pudo cargarse. ");
+						utn_anyKey("para continuar");
 					}
 				}
 				else {
-					printf("\nError: los datos de los pasajeros ya fueron cargados desde el archivo data.csv");
+					printf("\nError: los datos de los pasajeros ya fueron cargados desde el archivo data.csv. ");
+					utn_anyKey("para continuar");
 				}
 				break;
 
@@ -63,33 +69,44 @@ int main(void) {
 					controller_addPassenger(passengers);
 					flagLoadedPassenger = TRUE;
 					flagSavedFile = FALSE;
+					printf("\n");
+					utn_anyKey("para continuar");
 				}
 				break;
 
 			case 4:
 				if(passengers != NULL && !ll_isEmpty(passengers)) {
 					controller_editPassenger(passengers);
+					printf("\n");
+					utn_anyKey("para continuar");
 				}
 				break;
 
 			case 5:
 				if(passengers != NULL && !ll_isEmpty(passengers)) {
 					controller_removePassenger(passengers);
+					printf("\n");
+					utn_anyKey("para continuar");
 				}
 				break;
 
 			case 6:
 				if(passengers != NULL && (flagLoadedFile == TRUE || flagLoadedPassenger == TRUE)) {
 					controller_ListPassenger(passengers);
+					printf("\n");
+					utn_anyKey("para continuar");
 				}
 				else {
-					printf("\nError: debe correr la opción 1, 2 o 3 primero");
+					printf("\nError: debe correr la opción 1, 2 o 3 primero. ");
+					utn_anyKey("para continuar");
 				}
 				break;
 
 			case 7:
 				if(passengers != NULL && (flagLoadedFile == TRUE || flagLoadedPassenger == TRUE) && !ll_isEmpty(passengers)) {
 					controller_sortPassenger(passengers);
+					printf("\n");
+					utn_anyKey("para continuar");
 				}
 				break;
 
@@ -98,14 +115,17 @@ int main(void) {
 					if(!controller_saveAsText(CSV_FILE, passengers)) {
 						controller_saveAsBinary(BIN_FILE, passengers);
 						flagSavedFile = TRUE;
-						printf("Archivo data.csv creado correctamente");
+						printf("\nArchivo data.csv creado correctamente. ");
+						utn_anyKey("para continuar");
 					}
 					else {
-						printf("\nError: el archivo data.csv no pudo crearse");
+						printf("\nError: el archivo data.csv no pudo crearse. ");
+						utn_anyKey("para continuar");
 					}
 				}
 				else {
-					printf("\nError: debe correr la opción 1, 2 o 3 primero");
+					printf("\nError: debe correr la opción 1, 2 o 3 primero. ");
+					utn_anyKey("para continuar");
 				}
 				break;
 
@@ -114,21 +134,25 @@ int main(void) {
 					if(!controller_saveAsBinary(BIN_FILE, passengers)) {
 						controller_saveAsText(CSV_FILE, passengers);
 						flagSavedFile = TRUE;
-						printf("Archivo data.bin creado correctamente");
+						printf("\nArchivo data.bin creado correctamente. ");
+						utn_anyKey("para continuar");
 					}
 					else {
-						printf("\nError: el archivo data.bin no pudo crearse");
+						printf("\nError: el archivo data.bin no pudo crearse. ");
+						utn_anyKey("para continuar");
 					}
 				}
 				else {
-					printf("\nError: debe correr la opción 1, 2 o 3 primero");
+					printf("\nError: debe correr la opción 1, 2 o 3 primero. ");
+					utn_anyKey("para continuar");
 				}
 				break;
 
 			case 10:
 				if(flagSavedFile == FALSE) {
 					option = -1;
-					printf("\nDebe guardar los cambios antes de salir del programa");
+					printf("\nDebe guardar los cambios antes de salir del programa. ");
+					utn_anyKey("para continuar");
 				}
 				else {
 					printf("\nGracias por usar el Administrador de Pasajeros de la Aerolínea");
